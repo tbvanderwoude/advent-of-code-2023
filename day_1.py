@@ -1,6 +1,7 @@
 from aoc_util import *
 
-def solver(text, allow_text_digits = False):
+
+def solver(text, allow_text_digits=False):
     digit_map = {
         "one": "1",
         "two": "2",
@@ -14,7 +15,7 @@ def solver(text, allow_text_digits = False):
     }
     callibration_values = []
     for line in text:
-        numbers = [] 
+        numbers = []
         i = 0
         for c in line:
             if c.isdecimal():
@@ -22,7 +23,7 @@ def solver(text, allow_text_digits = False):
             if allow_text_digits:
                 subline = line[i:]
                 for digit in digit_map:
-                    index = subline.find(digit) 
+                    index = subline.find(digit)
                     if index != -1 and index == 0:
                         numbers.append(digit_map[digit])
                         continue
@@ -35,7 +36,8 @@ def solver(text, allow_text_digits = False):
     cal_sum = sum(callibration_values)
     print(cal_sum)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     text = load_input(1)
     solver(text)
-    solver(text,True)
+    solver(text, True)
