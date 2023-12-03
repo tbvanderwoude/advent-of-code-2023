@@ -1,3 +1,5 @@
+from aoc_util import *
+
 def solver(text, allow_text_digits = False):
     digit_map = {
         "one": "1",
@@ -11,7 +13,7 @@ def solver(text, allow_text_digits = False):
         "nine": "9",
     }
     callibration_values = []
-    for line in text.splitlines():
+    for line in text:
         numbers = [] 
         i = 0
         for c in line:
@@ -34,7 +36,6 @@ def solver(text, allow_text_digits = False):
     print(cal_sum)
 
 if __name__ == '__main__':
-    with open("inputs/day-1.txt") as f:
-        text = f.read()
-        solver(text)
-        solver(text,True)
+    text = load_input(1)
+    solver(text)
+    solver(text,True)
