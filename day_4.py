@@ -11,14 +11,11 @@ part_1 = 0
 multipliers = [1 for _ in range(len(lines))]
 for i, card_str in enumerate(lines):
     numbers = card_str.split(":")[1]
-    # print(numbers)
     x = numbers.split("|")
     winning, card = read_numbers(x[0]), read_numbers(x[1])
-    # print(winning, card)
     y = sum([n in winning for n in card])
     if y > 0:
         score = 2 ** (y - 1)
-        # print(score)
         part_1 += score
         self_mult = multipliers[i]
         print(
