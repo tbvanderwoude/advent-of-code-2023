@@ -1,10 +1,5 @@
 from aoc_util import *
 
-
-def read_numbers(s):
-    return list(map(int, s.strip().split()))
-
-
 lines = load_input(4)
 n = len(lines)
 part_1 = 0
