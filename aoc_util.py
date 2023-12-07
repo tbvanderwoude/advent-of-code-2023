@@ -6,5 +6,6 @@ def load_input(day):
         print("Input file could not be read, did you copy it to inputs?")
         return []
 
+
 def read_numbers(s):
     return list(map(int, s.strip().split()))
