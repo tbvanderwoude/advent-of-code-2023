@@ -26,7 +26,7 @@ cards_2 = ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"]
 def determine_type(s, jokers=False):
     counter_map = dict(Counter(s))
 
-    rev_sorter = lambda x: list(sorted(x, key=lambda x: -x[1]))
+    rev_sorter = lambda x: list(reversed(sorted(x, key=lambda x: x[1])))
     counts = rev_sorter(counter_map.items())
     if jokers and "J" in counter_map:
         joker_counts = counter_map["J"]
