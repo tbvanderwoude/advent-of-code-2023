@@ -6,15 +6,17 @@ from math import lcm
 
 def nodes_to_int(node: str):
     base = ord("A")
-    l = [(ord(x) - base) * 26 ** i for (i, x) in enumerate(reversed(node))]
+    l = [(ord(x) - base) * 26**i for (i, x) in enumerate(reversed(node))]
     return sum(l)
+
 
 def int_to_node_str(n):
     base = ord("A")
     chars = []
-        
-    f = lambda i: chr(n//(26 ** (2-i)) % 26 + ord("A"))
+
+    f = lambda i: chr(n // (26 ** (2 - i)) % 26 + ord("A"))
     return "".join([f(i) for i in range(3)])
+
 
 def compute_steps_az(instructions: str, desert_map: dict[int, (int, int)]):
     final = nodes_to_int("ZZZ")
@@ -78,7 +80,9 @@ print(part_1)
 # Solve part 2
 starts = list(filter(lambda x: x % 26 == 0, desert_map))
 
-end_steps = [compute_steps_to_zs(instructions, desert_map, start)[0] for start in starts]
+end_steps = [
+    compute_steps_to_zs(instructions, desert_map, start)[0] for start in starts
+]
 
 part_2 = lcm(*end_steps)
 print(part_2)

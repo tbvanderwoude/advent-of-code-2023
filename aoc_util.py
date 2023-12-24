@@ -9,3 +9,9 @@ def load_input(day):
 
 def read_numbers(s):
     return list(map(int, s.strip().split()))
+
+
+def grid_generator(grid):
+    for j, r in enumerate(grid):
+        for i, c in enumerate(r):
+            yield (i, j, c)

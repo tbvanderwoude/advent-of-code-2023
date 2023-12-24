@@ -1,9 +1,10 @@
 from aoc_util import *
 from functools import reduce
 
+
 def diff_seq(seq):
-    return list(map(lambda x: x[1]-x[0], zip(seq,seq[1:])))
-    
+    return list(map(lambda x: x[1] - x[0], zip(seq, seq[1:])))
+
 
 def construct_pyramid_until_zeroes(seq):
     if all([x == 0 for x in seq]):
@@ -23,7 +24,7 @@ for seq in seqs:
     pyramid = construct_pyramid_until_zeroes(seq)
     # print(pyramid)
     new_element = sum([s[-1] for s in pyramid])
-    prev_element = reduce(lambda x,y: y[0] - x, reversed(pyramid),0)
+    prev_element = reduce(lambda x, y: y[0] - x, reversed(pyramid), 0)
 
     # print(prev_element)
     part_1 += new_element
