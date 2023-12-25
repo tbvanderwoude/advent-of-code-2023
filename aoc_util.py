@@ -1,7 +1,10 @@
-def load_input(day):
+def load_input(day, strip_newline=False):
     try:
         with open(f"inputs/day-{day}.txt") as f:
-            return f.readlines()
+            if strip_newline:
+                return list(map(lambda s: s.strip(), f.readlines()))
+            else:
+                f.readlines()
     except:
         print("Input file could not be read, did you copy it to inputs?")
         return []
