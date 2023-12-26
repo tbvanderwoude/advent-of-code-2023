@@ -1,4 +1,5 @@
 from aoc_util import *
+from typing import List
 
 lines = load_input(12, True)
 
@@ -11,35 +12,46 @@ def is_match(ref, pat):
     return all([c_r == "?" or c_r == c_p for (c_r, c_p) in zip(ref, pat)])
 
 
-def construct_patterns_len(groups, l, ref_p: str, first=True):
+def construct_patterns_len(groups: List[int], ref_p: str) -> List[str]:
+    l = len(ref_p)
     if groups == []:
-        return ["." * len(ref_p)]
+        patt = "." * l
+        if is_match(ref_p,patt):
+            return [patt]
+        else:
+            return []
     base_len = sum(groups) + len(groups) - 1
     budget = l - base_len
     if budget == 0:
-        return [construct_base_pattern(groups)]
-    elif budget < 0:
+        base_pattern = construct_base_pattern(groups)
+        if is_match(ref_p,base_pattern):
+            return [base_pattern]
+        else:
+            return []
+    if budget < 0:
         return []
     else:
         h, t = groups[0], groups[1:]
         all_sols = []
-        for i in range(budget):
+        for i in range(budget+1):
             prefix = "." * i + "#" * h
+            if len(groups) > 1:
+                prefix += '.'
             n_p = len(prefix)
             if is_match(ref_p[:n_p], prefix):
-                tail_sol = construct_patterns_len(t, l - n_p, ref_p[n_p:])
+                tail_sol = construct_patterns_len(t, ref_p[n_p:])
                 all_sols.extend([prefix + s for s in tail_sol])
         return all_sols
-        # places = len(groups) + 2
-        # print(f"To do: divide {budget} over {places} places")
 
 
+part_1 = 0
 for line in lines:
     pattern, groups = line.split(" ")
     l = len(pattern)
     groups = read_numbers(groups.replace(",", " "))
-    # pattern = '.' + pattern + '.'
-    print(pattern, groups)
-    patterns = construct_patterns_len(groups, l, pattern)
-    print(patterns)
-    # print(construct_pattern_len(groups))
+    patterns = construct_patterns_len(groups, pattern)
+    n = len(patterns)
+    part_1 += n
+    for p in patterns:
+        assert(len(p) == l)
+print(f"Part 1: {part_1}")
